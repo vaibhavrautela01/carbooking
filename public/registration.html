@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="registration.css">
+    <title>Pooling system</title>
+</head>
+<body>
+    <script>
+        function login(){
+            alert("You Must Log-In Window")
+        }
+    </script>
+    <header>
+        <div class="login">
+                <nav class="navtext">
+                    <ul>
+                        <a href="owner_after_login.html" class="menu" target="_blank">My Profile</a>
+                        <a href="edit_profile.html" class="menu" target="_blank">Edit Profile</a>
+                        <a href="book_ride.html" class="menu" target="_blank">Book Ride</a>
+                        <a href="update_ride.html" class="menu" target="_blank">Update Ride</a>
+                        
+                    </ul>                    
+                </nav>
+            <img id="photo" src="location.png">
+            <h1 id="a">LIFT-LINK</h1>
+            <div class=login>
+                    <a href="owner_login.html" class="loginreg" >Login</a>
+                    <a href="registration.html" class="log" target="_blank">Register /</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="column2">
+            <p>POOL & ROLL : SHARE THE RIDE, SAVE THE EARTH!</p> <br><br>
+            <marquee><p>Carpooling is the sharing of car journeys so that more than one person travels in a car, and prevents the need for others to have to drive to a location themselves. Carpooling is considered a Demand-Responsive Transport (DRT) service</p></marquee>
+        </div>
+
+        <div class="column3">
+            <nav>
+                <ul>
+                    <div>
+                        <a onclick="login()" href="owner_login.html">
+                            <img id="search"src="https://cdn-icons-png.flaticon.com/128/751/751463.png" alt="Icon" class="nav-icon"><br>
+                            <div id="e">Search Cab</div></a>
+                    </div>
+                    <div>
+                        <a onclick="login()" href="owner_login.html">
+                            <img id="search"src="https://img.icons8.com/?size=100&id=12684&format=png"><br>
+
+                            <div id="e1">Lift-Link Parking!</div></a>
+                    </div>
+                    <div>
+                        <a onclick="login()" href="owner_login.html"> 
+                            <img id="search"src="https://img.icons8.com/?size=100&id=44471&format=png"><br>
+                            <div id="e2">Service</div></a>
+                    </div>
+                    <div>
+                        <a onclick="login()" href="owner_login.html">
+                            <img id="search"src="https://cdn-icons-png.flaticon.com/128/3249/3249904.png"><br>
+                            <div id="e3">Contact us?</div></a>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+
+
+        <div class="form-container">
+        <div class="topic">
+            <form action="/registration" method="POST">
+                <h1 id="title">Ride Way</h1>
+                <table>
+                    <tr>
+                        <td class="td1">Name:</td>
+                        <td><input type="text" name="name" placeholder="Enter your name"></td>
+                        <td class="td">Aadhaar No:</td> 
+                        <td><input type="text" name="aadhar" placeholder="Enter your Aadhaar number"></td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td class="td1">Address:</td>
+                        <td><input type="text" name="address" placeholder="Enter your address"></td>
+                        <td class="td">City:</td>
+                        <td><input type="text" name="city" placeholder="Enter your city"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1">Pin-Code:</td>
+                        <td><input type="number" name="pincode" placeholder="Enter your pin code"></td>
+                        <td class="td">State:</td>
+                        <td><input type="text" name="state" placeholder="Enter your state"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1">Account Number:</td>
+                        <td><input type="text" name="account" placeholder="Enter your account number"></td>
+                        <td class="td">Charge:</td>
+                        <td><input type="number" name="charge" placeholder="Enter charges per km"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1">Phone Number:</td>
+                        <td><input type="text" name="phoneno" placeholder="Enter your phone number"></td>
+                        <td class="td">Email:</td>
+                        <td><input type="text" name="email" placeholder="Enter your email"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1">Vehicle Registration:</td>
+                        <td><input type="text" name="vehicle_reg" placeholder="Enter vehicle registration number"></td>
+                        <td class="td">DL Number:</td>
+                        <td><input type="text" name="dl_no" placeholder="Enter DL number"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="td1">Pollution Expiry Date:</td>
+                        <td><input type="date" name="Pollution" placeholder="Enter pollution expiry date"></td>
+                        <td class="td">Document cleared:</td>
+                        <td>
+                            <select name="document_clear">
+                                <option value="choose">Choose your option</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="td1">Driving Experience:</td>
+                        <td><input type="number" name="driving_expe" placeholder="Enter driving experience"></td>
+                        
+                        <td class="td">Password:</td>
+                        <td><input type="password" name="password" placeholder="Enter your password"></td> 
+                    </tr>
+
+                    <tr>
+                        <td class="td1">Enter the UserName:</td>
+                        <td><input type="text" name="username" placeholder="Enter vehicle registration number"></td>
+
+                        <td class="td">Re-password:</td>
+                        <td><input type="password" name="repassword" placeholder="Re-password" ></td>  
+                    </tr>
+
+                        
+                       <br><br> <td><button id="submit" type="submit">Submit</button></td>
+
+                </table>
+            </form>
+        </div>
+        </div>
+    </div>
+
+
+    
+</body>
+<footer>
+    <div class="footer-section">
+        <ul>
+            <li><a href="https://mail.google.com/">Contact us?</a></li>
+            <li><a href="https://mail.google.com/">call: 6397918693</a></li>
+            <li><a href="https://mail.google.com/">Mail:rautelavaibhav01@gmail.com </a></li>
+
+        </ul>
+    </div>
+    <div class="footer-section">
+        <ul>
+            <li><a href="#">Our Service</a></li>
+            <li><a href="https://mail.google.com/">call: 6397918693</a></li>
+            <li><a href="https://mail.google.com/">Mail:rautelavaibhav01@gmail.com </a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="https://mail.google.com/">call: 6397918693</a></li>
+            <li><a href="https://mail.google.com/">Mail:rautelavaibhav01@gmail.com </a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <ul>
+            <li><a href="#">Terms & Condition</a></li>
+            <li><a href="https://mail.google.com/">call: 6397918693</a></li>
+            <li><a href="https://mail.google.com/">Mail:rautelavaibhav01@gmail.com </a></li>
+        </ul>
+    </div>
+</footer>
+
+<div id="foot">MAJOR PROJECT Copyright © 2023-2024- All rights reserved || Designed By: Vaibhav Rautela </div>
+</html>

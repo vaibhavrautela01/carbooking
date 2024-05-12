@@ -1,0 +1,21 @@
+table{
+    position: relative;
+    width: 100%;
+    border-color:black;
+    border-radius: 8px;
+    border: 0;
+    padding-bottom: 50px;
+}
+table tr,td,th{
+    padding: 5px;
+    
+    
+}
+table a:hover{
+    color:red;
+
+}
+
+table{
+    background-color: antiquewhite;
+}
