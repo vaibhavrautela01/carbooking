@@ -1,0 +1,38 @@
+table{
+    position: relative;
+    width: 100%;
+    border-color:black;
+    border-radius: 8px;
+    border: 0;
+    padding-bottom: 50px;
+}
+table tr,td,th{
+    padding: 5px;
+    
+    
+}
+table a:hover{
+    color:red;
+}
+table .l{
+    background-color: red;
+    padding: 5px;
+    color: white;
+}
+table .l:hover{
+    background-color: black;
+}
+table tr{
+    width: 100%;
+}
+
+
+.l{
+    color:white;
+    background-color: red;
+    padding: 5px;
+}
+.l:hover{
+background-color: black;
+color: white;
+}

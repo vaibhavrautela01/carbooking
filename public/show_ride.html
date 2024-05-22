@@ -3,46 +3,35 @@
 
 <head>
     <link rel="stylesheet" href="show_ride.css">
+    <link rel="stylesheet" href="decorate.css">
+    <link rel="icon" type="image/x-icon" href="/public/vaibhav.ico">
+
+
+
+
     <title>Pooling system</title>
     <script>
 
-        function showride() {
-            var xhttp;
-            if (window.XMLHttpRequest) {
-                xhttp = new XMLHttpRequest();
-            } else {
-                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xhttp.onreadystatechange = function () {
-                if (xhttp.readyState == 4 && xhttp.status == 200) {
-                    const item = xhttp.responseText;
-                    const data = JSON.parse(item);
+            function showride() {
+        var xhttp = new XMLHttpRequest();
 
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                const item = xhttp.responseText;
+                const data = JSON.parse(item);
+                let text = "<table border='1' width='100%' cellpadding='0' cellspacing='0'>";
+                text += "<th>Name</th><th>Address</th><th>Aadhar No.</th><th>City</th><th>State</th><th>Pincode</th><th>Account</th><th>Charge</th><th>Phone No.</th><th>Email</th><th>Vehicle Reg.</th><th>DL No.</th><th>Pollution</th><th>Doc Clear</th><th>Driving Exp</th><th>Ac</th><th>Starting</th><th>Ending</th><th>Date</th><th>S.Id</th>"
+                for (let x in data) {
 
-                    document.getElementById("v1").innerHTML = data[0].name;
-                    document.getElementById("v2").innerHTML = data[0].address;
-                    document.getElementById("v3").innerHTML = data[0].aadhar;
-                    document.getElementById("v4").innerHTML = data[0].City;
-                    document.getElementById("v5").innerHTML = data[0].state;
-                    document.getElementById("v6").innerHTML = data[0].pincode;
-                    document.getElementById("v7").innerHTML = data[0].account;
-                    document.getElementById("v8").innerHTML = data[0].charge_per_unit;
-                    document.getElementById("v9").innerHTML = data[0].phoneno;
-                    document.getElementById("v10").innerHTML = data[0].email;
-                    document.getElementById("v11").innerHTML = data[0].vehicle_reg;
-                    document.getElementById("v12").innerHTML = data[0].dl_no;
-                    document.getElementById("v13").innerHTML = data[0].pollution;
-                    document.getElementById("v14").innerHTML = data[0].document_clear;
-                    document.getElementById("v15").innerHTML = data[0].driving_experience;
-                    document.getElementById("v16").innerHTML = data[0].ac;
-                    document.getElementById("v17").innerHTML = data[0].starting_location;
-                    document.getElementById("v18").innerHTML = data[0].ending_location;
-                    document.getElementById("v19").innerHTML = data[0].time_taken;
+                    text += "<tr><td>" + data[x].name + "</td><td>" + data[x].address + "</td><td>" + data[x].aadhar + "</td><td>" + data[x].city + "</td><td>" + data[x].state + "</td><td>" + data[x].pincode + "</td><td>" + data[x].account + "</td><td>" + data[x].charge_per_unit + "</td><td>" + data[x].phoneno + "</td><td>" + data[x].email + "</td><td>" + data[x].vehicle_reg + "</td><td>" + data[x].dl_no+ "</td><td>" + data[x].pollution+ "</td><td>" + data[x].document_clear+ "</td><td>" + data[x].driving_experience+ "</td><td>" + data[x].ac+ "</td><td>" + data[x].starting_location+ "</td><td>" + data[x].ending_location+ "</td><td>" + data[x].time_taken+ "</td><td>" + data[x].sid+ "</td></tr>";
                 }
+                text += "</table>";
+                document.getElementById("v1").innerHTML = text;
             }
-            xhttp.open("GET", "showride.json", true);
-            xhttp.send();
         }
+        xhttp.open("GET", "showride.json", true);
+        xhttp.send();
+    }
     </script>
 </head>
 
@@ -53,8 +42,8 @@
                     <ul>
                         <a href="owner_after_login.html" class="menu" target="_blank">My Profile</a>
                         <a href="edit_profile.html" class="menu" target="_blank">Edit Profile</a>
-                        <a href="book_ride.html" class="menu" target="_blank">Book Ride</a>
-                        <a href="update_ride.html" class="menu" target="_blank">Update Ride</a>
+                        <a href="post_ride.html" class="menu" target="_blank">Post Ride</a>
+                        <a href="updatepostride.html" class="menu" target="_blank">Update Ride</a>
                         
                     </ul>                    
                 </nav>
@@ -62,7 +51,7 @@
             <h1 id="a">LIFT-LINK</h1>
             <div class=login>
                 <div class="dropdown">
-                    <img src="user.png" alt="User Photo" class="dropbtn">
+                    <img src="th.jpeg" alt="User Photo" class="dropbtn">
                     <div class="dropdown-content">
                       <a href="owner_login.html">Logout</a>
                       <a href="passwordreset.html">Change Password</a>
@@ -116,20 +105,7 @@
     </div>
 
     <div id="set">
-        <div class="teama">
-            <div class="b">
-                <ul id="teamatext">
-                    <div class="dp" style="text-align: center;">
-                        <li>
-                            <input type="file" name="photo">
-                        </li>
-                    </div>
-                    <a href="owner_after_login.html" class="p" target="_blank">My Profile</a>
-                    <a href="edit_profile.html" class="p" target="_blank">Edit Profile</a>
-                    <a href="post_ride.html" class="p" target="_blank">Post Ride</a>
-                    <a href="show_ride.html" class="p" target="_blank">Show Ride</a>
-                </ul>
-            </div>
+       
 
         </div>
         <div class="teamb">
@@ -139,82 +115,52 @@
                     <div class="update">
                         <h1 id="title">Show Ride</h1>
                     </div>
-                    <table>
-                        <tr>
-                            <td class="td1"><b>Name:</b> <div id="v1"></div> </td>
-                            
-                            <td class="td"><b>address:</b><div id="v2"></div></td>
-                            
-                        </tr>
 
-                        <tr>
-                            <td class="td1"><b>aadhar:</b><div id="v3"></div></td>
+                    <div id="v1"></div> 
                             
-                            <td class="td"><b>city:</b> <div id="v4"></div></td>
+                    <div id="v2"></div>
                             
-                        </tr>
-
-                        <tr>
-                            <td class="td1"><b>Pin-Code:</b><div id="v5"></div></td>
+                    <div id="v3"></div>
                             
-                            <td class="td"><b>State:</b><div id="v6"></div></td>
+                    <div id="v4"></div>
                             
-                        </tr>
-
-                        <tr>
-                            <td class="td1"><b>Account Number:</b><div id="v7"></div></td>
+                    <div id="v5"></div>
                             
-                            <td class="td"><b>Charge:</b><div id="v8"></div></td>
+                    <div id="v6"></div>
                             
-                        </tr>
-
-                        <tr>
-                            <td class="td1"><b>Phone Number:</b> <div id="v9"></div></td>
+                    <div id="v7"></div>
+                            
+                    <div id="v8"></div>
+                            
+                   <div id="v9"></div>
                            
-                            <td class="td"><b>Email:</b><div id="v10"></div></td>
+                   <div id="v10"></div>
                             
-                        </tr>
-
-                        <tr>
-                            <td class="td1"><b>Vehicle Registration:</b><div id="v11"></div></td>
+                  <div id="v11"></div>
                             
-                            <td class="td"><b>Pollution Expiry Date:</b> <div id="v12"></div></td>
+                   <div id="v12"></div>
                            
-                        </tr>
-
-                        <tr>
-
-                            <td class="td1"><b>Document cleared:</b><div id="v13"></div></td>
+               <div id="v13"></div>
                             
-                            <td class="td"><b>DL Number:</b> <div id="v14"></div></td>
+                    <div id="v14"></div>
                            
 
 
-                        </tr>
-
-
-                        <tr>
-                            <td class="td1"><b>Driving Experience:</b><div id="v15"></div></td>
+                  <div id="v15"></div>
                             
 
 
-                            <td class="td"><b>AC?:</b><div id="v16"></div></td>
+                <div id="v16"></div>
                            
-                        </tr>
-
-                        <tr>
-                            <td class="td1"><b>Starting Point:</b><div id="v17"></div></td>
+                <div id="v17"></div></td>
                             
-                            <td class="td"><b>Ending Point:</b><div id="v18"></div></td>
+                <div id="v18"></div>
                             
-                        </tr>
-
-                        <tr>
-                            <td class="td1"><b>Time:</b><div id="v19"></div></td>
+                <div id="v19"></div>
                             
-                        </tr>
+    
 
-                        <input type="submit" value="click me" />
+                <input type="submit" id="z" value="Refresh" />
 
                     </table>
                 </form>

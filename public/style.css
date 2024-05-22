@@ -13,9 +13,25 @@ table tr,td,th{
 }
 table a:hover{
     color:red;
-
 }
-
+table .l{
+    background-color: red;
+    padding: 5px;
+    color: white;
+}
+table .l:hover{
+    background-color: black;
+}
 table{
     background-color: antiquewhite;
+}
+
+.l{
+    color:white;
+    background-color: red;
+    padding: 5px;
+}
+.l:hover{
+background-color: black;
+color: white;
 }

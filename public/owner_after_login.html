@@ -2,6 +2,8 @@
 <html>
 <head>
     <link rel="stylesheet" href="owner_after_login.css">
+    <link rel="icon" type="image/x-icon" href="/public/vaibhav.ico">
+
     <title>Pooling system</title>
     <script>
 
@@ -48,8 +50,8 @@
                 <ul>
                 <a href="owner_after_login.html" class="menu" target="_blank">My Profile</a>
                 <a href="edit_profile.html" class="menu" target="_blank">Edit Profile</a>
-                <a href="book_ride.html" class="menu" target="_blank">Book Ride</a>
-                <a href="update_ride.html" class="menu" target="_blank">Update Ride</a>
+                <a href="post_ride.html" class="menu">Post Ride</a>
+                    <a href="updatepostride.html" class="menu">Update Ride</a>
                     
                 </ul>                    
             </nav>
@@ -57,7 +59,7 @@
         <h1 id="a">LIFT-LINK</h1>
         <div class=login>
             <div class="dropdown">
-                <img src="user.png" alt="User Photo" class="dropbtn">
+                <img src="th.jpeg" alt="User Photo" class="dropbtn">
                 <div class="dropdown-content">
                   <a href="owner_login.html">Logout</a>
                   <a href="passwordreset.html">Change Password</a>
@@ -104,15 +106,18 @@
     <div class="teama">
             <div class="b">
                 <ul id="teamatext">
-                    <div class="dp" style="text-align: center;">
-                    <li>
-                        <input type="file"  name="photo">
-                    </li>
-                </div>
+                    <div class="dp" style="text-align: center;"><img src="th.jpeg" alt="Paris">
+                        <li>
+                            <input type="file"  name="photo">
+                        </li>
+                    </div> 
+                    
                     <a href="owner_after_login.html" class="p">My Profile</a>
                     <a href="edit_profile.html" class="p">Edit Profile</a>
-                    <a href="post_ride.html" class="p">Post Ride</a>
-                    <a href="show_ride.html" class="p">Show Ride</a>
+                    <a href="showbooking.html" class="p">Booking</a>
+                    <a href="show_ride.html" class="p">Show Post Ride</a>
+
+                    
                 </ul>
             </div>   
 
@@ -131,56 +136,56 @@
 
                                 <tr>
                                     
-                                    <td class="td1"><b>Name:</b> <div id="p1"></div></td>
+                                    <td class="td1"><b>Name:</b> <div class="i"><div id="p1"></div></div></td>
                                     
 
-                                    <td class="td"><b>Aadhaar No:</b> <div id="p2"></div> </td> 
+                                    <td class="td"><b>Aadhaar No:</b> <div class="i"> <div id="p2"></div></div> </td> 
                                     
 
                                     
                                 </tr>
                                 
                                 <tr>
-                                    <td class="td1"><b>Address:</b> <div id="p3"></div> </td>
+                                    <td class="td1"><b>Address:</b><div class="i"> <div id="p3"></div></div> </td>
                                     
 
 
-                                    <td class="td"><b>City:</b> <div id="p4"></div></td>
+                                    <td class="td"><b>City:</b><div class="i"> <div id="p4"></div></div></td>
                                      
 
 
                                 </tr>
             
                                 <tr>
-                                    <td class="td1"><b>Pin-Code:</b><div id="p5"></div> </td>
+                                    <td class="td1"><b>Pin-Code:</b><div class="i"><div id="p5"></div></div> </td>
                                     
 
-                                    <td class="td"><b>State:</b> <div id="p6"></div> </td>
+                                    <td class="td"><b>State:</b> <div class="i"><div id="p6"></div></div> </td>
                                     
                                     
                                 </tr>
             
                                 <tr>
-                                    <td class="td1"><b>Account Number:</b> <div id="p7"></div> </td>
+                                    <td class="td1"><b>Account Number:</b> <div class="i"><div id="p7"></div></div> </td>
                                     
-                                    <td class="td"><b>Phone Number:</b> <div id="p8"></div> </td>
+                                    <td class="td"><b>Phone Number:</b> <div class="i"><div id="p8"></div> </div></td>
 
                                 </tr>
             
                                 <tr>
                                     
-                                    <td class="td1"><b>Vehicle Registration:</b> <div id="p10"></div> </td>
+                                    <td class="td1"><b>Vehicle Registration:</b> <div class="i"><div id="p10"></div></div> </td>
 
-                                    <td class="td"><b>Email:</b> <div id="p9"></div> </td>
+                                    <td class="td"><b>Email:</b> <div class="i"><div id="p9"></div></div> </td>
                                     
 
                                 </tr>
             
                                 <tr>
-                                    <td class="td1"><b>Pollution Expiry Date:</b> <div id="p12"></div> </td>
+                                    <td class="td1"><b>Pollution Expiry Date:</b> <div class="i"><div id="p12"></div></div> </td>
 
 
-                                    <td class="td"><b>DL Number:</b> <div id="p11"></div> </td>
+                                    <td class="td"><b>DL Number:</b><div class="i"> <div id="p11"></div></div> </td>
                                     
 
                                 </tr>
@@ -189,16 +194,9 @@
             
             
                                 <tr>
-                                    <td class="td1"><b>Driving Experience:</b><div id="p13"></div> </td>
-                                    <td class="td">Document cleared:
-                                        <td class="in">
-                                            <select name="document_clear"id="p14" >
-                                                <option value="choose">Choose your option</option>
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
-                                            </select>
-                                        </td>
-
+                                    <td class="td1"><b>Driving Experience:</b><div class="i"><div id="p13"></div></div> </td>
+                                    <td class="td"><b>Document cleared:</b><div class="i"><div id="p14"></div></div>
+                                    
                                     </td>
                                 </tr>
             
