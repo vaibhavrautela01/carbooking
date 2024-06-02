@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Form</title>
+</head>
+<body>
+    <form id="prediction-form">
+        <label for="cartype">Car Type:</label>
+        <input type="text" id="cartype" name="cartype" required>
+        
+        
+        <label for="ac">AC (0 or 1):</label>
+        <input type="number" id="ac" name="ac" required>
+
+        
+        <label for="distance">Distance:</label>
+        <input type="number" id="distance" name="distance" required>
+
+        
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        
+        <label for="drivingexp">Driving Experience (years):</label>
+        <input type="number" id="drivingexp" name="drivingexp" required>
+
+        
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" name="rating" step="0.1" required>
+
+        
+        <button type="submit">Predict</button>
+    </form>
+
+    <div id="prediction-result"></div>
+
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            var formData = new FormData(this);
+            fetch('/a', {
+                method: 'POST',
+                body: formData
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                if (data.error) {
+                    document.getElementById('prediction-result').innerText = 'Error: ' + data.error;
+                } else {
+                    document.getElementById('prediction-result').innerText = 'Predicted Price: ' + data.prediction + 'Rs';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

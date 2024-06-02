@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--<link rel="stylesheet" href="machine.css">-->
+    <title>Pooling system</title>
+    <link rel="icon" type="image/x-icon" href="/public/vaibhav.ico">
+</head>
+<script>
+ /*   function aa() {
+        var xhttp;
+        if (window.XMLHttpRequest) {
+            xhttp = new XMLHttpRequest();
+        } else {
+            xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                const item = xhttp.responseText;
+                const data = JSON.parse(item);
+
+                document.getElementById("time").value = data[0].time;
+                document.getElementById("charge_per_unit").value = data[0].charge_per_unit;
+                document.getElementById("sid").value = data[0].sid;
+            }
+        }
+        xhttp.open("GET", "search1.json", true);
+        xhttp.send();
+    }*/
+</script>
+<body>
+    <header>
+        <div class="login">
+            <nav class="navtext">
+                <ul>
+                    <a href="dashboard2.html" class="menu" target="_blank">My Profile</a>
+                    <a href="clienteditprofile.html" class="menu" target="_blank">Edit Profile</a>
+                    <a href="update_ride.html" class="menu" target="_blank">Update Ride</a>
+                </ul>
+            </nav>
+            <!--<img id="photo" src="location.png">-->
+            <h1 id="a">LIFT-LINK</h1>
+            <div class="login">
+                <div class="dropdown">
+                    <!--<img src="th.jpeg" alt="User Photo" class="dropbtn">-->
+                    <div class="dropdown-content">
+                        <a href="login2.html">Logout</a>
+                        <a href="passwordreset.html">Change Password</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <br>
+    <p>POOL & ROLL: SHARE THE RIDE, SAVE THE EARTH!</p><br><br>
+    <marquee>
+        <p>Carpooling is the sharing of car journeys so that more than one person travels in a car, and prevents the need for others to have to drive to a location themselves. Carpooling is considered a Demand-Responsive Transport (DRT) service</p>
+    </marquee>
+    <div class="column3">
+        <nav>
+            <ul>
+                <div>
+                    <a onclick="login()" href="searchride.html">
+                       <!-- <img id="search" src="https://cdn-icons-png.flaticon.com/128/751/751463.png" alt="Icon" class="nav-icon"><br>-->
+                        <div id="e">Search Cab</div>
+                    </a>
+                </div>
+                <div>
+                    <a onclick="login()" href="parking.html">
+                        <!--<img id="search" src="https://img.icons8.com/?size=100&id=12684&format=png"><br>
+                        <div id="e1">Lift-Link Parking!</div>-->
+                    </a>
+                </div>
+                <div>
+                    <a onclick="login()" href="#">
+                       <!-- <img id="search" src="https://img.icons8.com/?size=100&id=44471&format=png"><br>-->
+                        <div id="e2">Service</div>
+                    </a>
+                </div>
+                <div>
+                    <a onclick="login()" href="https://mail.google.com/mail/u/1/#inbox?compose=DmwnWrRqjCHQxQhvQHKpdWvrqjcDFdxxwgXCjGVkcmqSKBfXrnwgHTXdJrnkGfbVbQxlfhCwrsSv">
+                        <!--<img id="search" src="https://cdn-icons-png.flaticon.com/128/3249/3249904.png"><br>-->
+                        <div id="e3">Contact us?</div>
+                    </a>
+                </div>
+            </ul>
+        </nav>
+    </div>
+    <form action="/a" method="POST" id="prediction-form">
+        <div id="demo">
+            <label for="cartype">Car Type:</label>
+            <select name="cartype">
+                <option value="">Choose</option>
+                <option value="sedan">Sedan</option>
+                <option value="suv">Suv</option>
+                <option value="hatchback">Hatchback</option>
+            </select><br>
+            <label for="ac">AC?:</label>
+            <select name="ac">
+                <option value="">Choose</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select><br>
+            <div>Distance:<input type="number" name="distance" id="distance"></div>
+            <div>Date:<input type="date" name="date" id="date"></div>
+            <div>Driving Experience:<input type="number" name="drivingexp" id="drivingexp"></div>
+            <div>Rating:<input type="number" step="0.1" name="rating" id="rating"></div>
+            <!--<div>Price:<input type="number" name="price" id="price"></div>-->
+            <input type="submit" value="Submit" class="b">
+            <div id="prediction-result"></div>
+        </div>
+    </form>
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            // Get form data
+            var formData = new FormData(this);
+            // Send form data to Flask route
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                // Display prediction result
+                document.getElementById('prediction-result').innerText = 'Predicted Price: ' + data.prediction;
+            });
+        });
+    </script>
+</body>
+<footer>
+    <div class="footer-section">
+        <ul>
+            <li><a href="https://mail.google.com/">Contact us?</a></li>
+            <li><a href="https://mail.google.com/">call: 6397918693</a></li>
+            <li><a href="https://mail.google.com/">Mail:rautelavaibhav01@gmail.com</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <ul>
+            <li><a href="#">Our Service</a></li>
+            <li><a href="https://mail.google.com/">call: 6397918693</a></li>
+            <li><a href="https://mail.google.com/">Mail:rautelavaibhav01@gmail.com</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="https://mail.google.com/">call: 6397918693</a></li>
+            <li><a href="https://mail.google.com/">Mail:rautelavaibhav01@gmail.com</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <ul>
+            <li><a href="#">Terms & Condition</a></li>
+            <li><a href="https://mail.google.com/">call: 6397918693</a></li>
+            <li><a href="https://mail.google.com/">Mail:rautelavaibhav01@gmail.com</a></li>
+        </ul>
+    </div>
+</footer>
+<div id="foot">MAJOR PROJECT Copyright © 2023-2024- All rights reserved || Designed By: Vaibhav Rautela </div>
+</html>

@@ -9,6 +9,8 @@ const users = require('./data').userDB;
 const app = express();
 const server = http.createServer(app);
 const fs = require('fs');
+const { Console } = require('console');
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, './public')));
@@ -168,11 +170,11 @@ app.post('/postride', async (req, res) => {
     var mydb = mysql.createConnection({ host: "localhost", user: "root", password: "root123", database: "liftlink" });
 
     try {
-        const { name, address, aadhar, city, state, pincode, account, charge_per_unit, phoneno, email, vehicle_reg, dl_no, pollution, document_clear, driving_experience, ac, starting_location, ending_location, time_taken,sid } = req.body;
+        const { name, address, aadhar, city, state, pincode, account, charge_per_unit, phoneno, email, vehicle_reg, dl_no, pollution, document_clear, driving_experience, ac, starting_location, ending_location, time_taken,sid,star } = req.body;
 
-        const sql = "INSERT INTO postride (name, address, aadhar, city, state, pincode, account, charge_per_unit, phoneno, email, vehicle_reg, dl_no, pollution, document_clear, driving_experience,ac, starting_location,ending_location,time_taken,sid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+        const sql = "INSERT INTO postride (name, address, aadhar, city, state, pincode, account, charge_per_unit, phoneno, email, vehicle_reg, dl_no, pollution, document_clear, driving_experience,ac, starting_location,ending_location,time_taken,sid,star) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
 
-        const values = [name, address, aadhar, city, state, pincode, account, charge_per_unit, phoneno, email, vehicle_reg, dl_no, pollution, document_clear, driving_experience, ac, starting_location, ending_location, time_taken,sid];
+        const values = [name, address, aadhar, city, state, pincode, account, charge_per_unit, phoneno, email, vehicle_reg, dl_no, pollution, document_clear, driving_experience, ac, starting_location, ending_location, time_taken,sid,star];
 
 
         mydb.query(sql, values, (err, result) => {
@@ -597,29 +599,93 @@ app.post('/book', async (req, res) => {
     var mydb = mysql.createConnection({ host: "localhost", user: "root", password: "root123", database: "liftlink" });
 
     try {
-        const {  name, startingpoint, endingpoint, aadhar, phoneno, accountno, charge, date , BookingId, sid, status,CustomerId } = req.body;
+        const {  name, startingpoint, endingpoint, aadhar, phoneno, accountno, charge, date , BookingId, sid, status,CustomerId,lat,lon,accuracy } = req.body;
 
-        const sql = "INSERT INTO booking(name, startingpoint, endingpoint, aadhar, phoneno, accountno, charge, date , BookingId, sid, status,CustomerId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+        const sql = "INSERT INTO booking(name, startingpoint, endingpoint, aadhar, phoneno, accountno, charge, date , BookingId, sid, status,CustomerId,lat,lon,accuracy) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
 
-        const values = [name, startingpoint, endingpoint, aadhar,  phoneno, accountno, charge, date , BookingId, sid, status, CustomerId];
+        const values = [name, startingpoint, endingpoint, aadhar,  phoneno, accountno, charge, date , BookingId, sid, status, CustomerId,lat,lon,accuracy];
 
-        mydb.query(sql, values, (err, result) => {
+        mydb.query(sql, values,  function (err, result){
             if (err) {
                 console.error("Error inserting record: ", err);
                 res.status(500).send("Error inserting record");
                 return;
             }
-            
             console.log("Record inserted.");
 
-            res.sendFile(path.join(__dirname, 'public', 'dashboard2.html'));
-
+            if (result.length > 0) {
+                res.redirect('/geo');
+            } else {
+                res.redirect('/ungeo');
+            }
         });
     } catch (error) {
         console.error("Error:", error);
         res.status(500).send("Error processing request");
     }
 });
+
+app.get('/geo', (req, res) => {
+    var mydb = mysql.createConnection({ host: "localhost", user: "root", password: "root123", database: "liftlink" });
+
+    mydb.connect(function (err) {
+        if (err) throw err;
+        
+        console.log("connected");
+        
+        mydb.query(" select * from booking", function (err, result) {
+            if (err) throw err;
+            
+            const fs = require('fs');
+            
+            const databasedata = JSON.stringify(result);
+            
+            const filePath = path.join(__dirname, './public/geo.json');
+            
+            fs.writeFile(filePath, databasedata, 'utf8', (err) => {
+                if (err) {
+                    console.error('Error writing file:', err);
+                    return;
+                }
+                console.log('JSON data has been saved to', filePath);
+            });
+            res.sendFile(path.join(__dirname, 'public', 'dashboard2.html'));
+        });
+    });
+    
+});
+
+
+app.get('/ungeo', (req, res) => {
+
+    var mydb = mysql.createConnection({ host: "localhost", user: "root", password: "root123", database: "liftlink" });
+
+    mydb.connect(function (err) {
+        if (err) throw err;
+        
+        console.log("connected");
+        
+        mydb.query(" select * from booking", function (err, result) {
+            if (err) throw err;
+            
+            const fs = require('fs');
+            
+            const databasedata = JSON.stringify(result);
+            
+            const filePath = path.join(__dirname, './public/geo.json');
+            
+            fs.writeFile(filePath, databasedata, 'utf8', (err) => {
+                if (err) {
+                    console.error('Error writing file:', err);
+                    return;
+                }
+                console.log('JSON data has been saved to', filePath);
+            });
+            res.sendFile(path.join(__dirname, 'public', 'dashboard2.html'));
+        });
+    });});
+
+
 
 
 
@@ -796,6 +862,387 @@ app.post('/updatepostride', async (req, res) => {
         res.status(500).send("Update server error");
     }
 });
+
+
+
+
+app.post('/rating', async (req, res) => {
+    var mydb = mysql.createConnection({ host: "localhost", user: "root", password: "root123", database: "liftlink" });
+
+    try {
+        var a1 = req.body.name;
+        var a2 = req.body.CustomerId;
+        var a3 = req.body.RiderId;
+        var a4 = req.body.date;
+        var a5 = req.body.BookingId;
+        var a6 = req.body.rate;
+
+    
+        mydb.connect(function (err){
+            if (err) throw err;
+                console.log("connected");
+                mydb.query("INSERT INTO rating(name, CustomerId, RiderId, date, BookingId, rate) values('" + a1 + "','" + a2 + "','" + a3 + "','" + a4 + "','" + a5 + "','" + a6 + "')",function(err, result) {
+            if (err) throw err;
+            console.log("Record inserted.");
+
+            if (result.length > 0) {
+                res.redirect('/b');
+            } else {
+                res.redirect('/a');
+            }
+
+            });
+        });
+    } catch (error) {
+        res.send("Internal server error");
+    }
+});
+
+
+
+app.get('/a', async (req, res) => {
+
+    try {
+        var a1 =1;
+
+        var con = mysql.createConnection({ host: "localhost", user: "root", password: "root123", database: "liftlink" });
+        con.connect(function (err) {
+            if (err) throw err;
+            console.log("connected");
+            con.query("select * from rating where RiderId ='" + a1 + "'", function (err, result) {
+                const fs = require('fs');
+                
+                // Convert JSON data to a string
+                const jsonString = JSON.stringify(result);
+                
+                // File path where you want to save the JSON data
+                const filePath = 'public/feedback.json';
+                
+                // Write the JSON string to the file
+                fs.writeFile(filePath, jsonString, 'utf8', (err) => {
+                    if (err) {
+                        console.error('Error writing file:', err);
+                        return;
+                    }
+                    console.log('JSON data has been saved to', filePath);
+                    
+                });
+                res.sendFile(path.join(__dirname, 'public', 'rating2.html'));
+            });
+        });
+        //data base code end
+    } catch
+    {
+        res.send("Internal server error");
+    }
+});
+
+app.get('/b', async (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'rating.html'));
+});
+
+
+
+
+
+
+
+app.post('/rating2', async (req, res) => {
+
+   const path = require('path');
+   const fs = require('fs');
+
+// Construct the absolute path to the JSON file
+const filePath = path.resolve(__dirname, 'public/feedback.json');
+
+// Read the JSON file
+fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+        console.error('Error reading the file:', err);
+        return;
+    }
+
+    // Parse the JSON data
+    let jsonData = JSON.parse(data);
+
+    // Calculate the average rate
+    let total = 0;
+    let count = jsonData.length;
+
+    for (let i = 0; i < count; i++) {
+        total = total + parseFloat(jsonData[i].rate);  // Convert the rate to a float
+    };
+
+    const avg = total / count;
+    var a=1;
+
+    var con = mysql.createConnection({ host: "localhost", user: "root", password: "root123", database: "liftlink" });
+    con.connect(function (err) {
+        if (err) throw err;
+            console.log("connected");
+    con.query(" update postride set star='" + avg + "' where sid='" + a + "'", function (err, result) {
+                if (err) throw err;
+                console.log("Database Updated");
+                
+            });
+        });
+        res.sendFile(path.join(__dirname, 'public', 'owner_after_login.html'));
+
+
+    
+  
+    // res.redirect('/star');
+   
+
+});
+
+});
+
+
+
+
+// app.get('/star', async (req, res) => {
+
+//         try {
+//             var a1 =1;
+    
+//             var con = mysql.createConnection({ host: "localhost", user: "root", password: "root123", database: "liftlink" });
+//             con.connect(function (err) {
+//                 if (err) throw err;
+//                 console.log("connected");
+//                 con.query("select * from rating where RiderId ='" + a1 + "'", function (err, result) {
+//                     const fs = require('fs');
+                    
+//                     // Convert JSON data to a string
+//                     const jsonString = JSON.stringify(result);
+                    
+//                     // File path where you want to save the JSON data
+//                     const filePath = 'public/star.json';
+                    
+//                     // Write the JSON string to the file
+//                     fs.writeFile(filePath, jsonString, 'utf8', (err) => {
+//                         if (err) {
+//                             console.error('Error writing file:', err);
+//                             return;
+//                         }
+//                         console.log('JSON data has been saved to', filePath);
+                        
+//                     });
+//                     res.sendFile(path.join(__dirname, 'public', 'rating.html'));
+//                 });
+//             });
+//             //data base code end
+//         } catch
+//         {
+//             res.send("Internal server error");
+//         }
+// });
+
+app.post('/mltime', async (req, res) => {
+    var mydb = mysql.createConnection({ host: "localhost", user: "root", password: "root123", database: "liftlink" });
+
+    try {
+        var a1 = req.body.name;
+        var a2 = req.body.CustomerId;
+        var a3 = req.body.RiderId;
+        var a4 = req.body.date;
+        var a5 = req.body.BookingId;
+        var a6 = req.body.traveltime;
+
+    
+        mydb.connect(function (err){
+            if (err) throw err;
+                console.log("connected");
+                mydb.query("INSERT INTO time(name, CustomerId, RiderId, date, BookingId, time) values('" + a1 + "','" + a2 + "','" + a3 + "','" + a4 + "','" + a5 + "','" + a6 + "')",function(err, result) {
+            if (err) throw err;
+            console.log("Record inserted.");
+
+            if (result.length > 0) {
+                res.redirect('/ml');
+            } else {
+                res.redirect('/mltime2');
+            }
+            });
+        });
+    } catch (error) {
+        res.send("Internal server error");
+    }
+});
+
+
+
+app.get('/mltime2', async (req, res) => {
+
+    try {
+        var a1 =1;
+
+        var con = mysql.createConnection({ host: "localhost", user: "root", password: "root123", database: "liftlink" });
+        con.connect(function (err) {
+            if (err) throw err;
+            console.log("connected");
+            con.query("select * from time where RiderId ='" + a1 + "'", function (err, result) {
+                const fs = require('fs');
+                
+                // Convert JSON data to a string
+                const jsonString = JSON.stringify(result);
+                
+                // File path where you want to save the JSON data
+                const filePath = 'public/time.json';
+                
+                // Write the JSON string to the file
+                fs.writeFile(filePath, jsonString, 'utf8', (err) => {
+                    if (err) {
+                        console.error('Error writing file:', err);
+                        return;
+                    }
+                    console.log('JSON data has been saved to', filePath);
+                    
+                });
+                res.sendFile(path.join(__dirname, 'public', 'time2.html'));
+            });
+        });
+        //data base code end
+    } catch
+    {
+        res.send("Internal server error");
+    }
+});
+
+
+
+// app.post('/r', async (req, res) => {
+
+//     const path = require('path');
+//     const fs = require('fs');
+ 
+//  // Construct the absolute path to the JSON file
+//  const filePath = path.resolve(__dirname, 'public/time.json');
+ 
+//  // Read the JSON file
+//  fs.readFile(filePath, 'utf8', (err, data) => {
+//      if (err) {
+//          console.error('Error reading the file:', err);
+//          return;
+//      }
+ 
+//      // Parse the JSON data
+//      let jsonData = JSON.parse(data);
+ 
+//      // Calculate the average rate
+//      let total = 0;
+//      let count = jsonData.length;
+ 
+//      for (let i = 0; i < count; i++) {
+//          total = total + parseFloat(jsonData[i].time);  // Convert the rate to a float
+//          console.log(total);
+//      };
+ 
+//      const avg = total / count;
+//      var a =1;
+ 
+//       var con = mysql.createConnection({ host: "localhost", user: "root", password: "root123", database: "liftlink" });
+//       con.connect(function (err) {
+//           if (err) throw err;
+//               console.log("connected");
+//       con.query(" update postride set time='" + avg + "' where sid='" + a + "'", function (err, result) {
+//                   if (err) throw err;
+//                   console.log("Database Updated");
+                 
+//               });
+//           });
+//     console.log("AVERAGE TIME"+avg);
+//      res.sendFile(path.join(__dirname, 'public', 'owner_after_login.html'));
+ 
+   
+//      // res.redirect('/star');
+ 
+//  });
+ 
+//  });
+
+app.post('/r', async (req, res) => {
+
+    const path = require('path');
+    const fs = require('fs');
+ 
+ // Construct the absolute path to the JSON file
+ const filePath = path.resolve(__dirname, 'public/time.json');
+ 
+ // Read the JSON file
+ fs.readFile(filePath, 'utf8', (err, data) => {
+     if (err) {
+         console.error('Error reading the file:', err);
+         return;
+     }
+ 
+     // Parse the JSON data
+     let jsonData = JSON.parse(data);
+ 
+     // Calculate the average rate
+     let total = 0;
+     let count = jsonData.length;
+ 
+     for (let i = 0; i < count; i++) {
+         total = total + parseFloat(jsonData[i].time);  // Convert the rate to a float
+     };
+ 
+     const avg = total / count;
+     let p=Math.round(avg);
+     var a=1;
+ 
+     var con = mysql.createConnection({ host: "localhost", user: "root", password: "root123", database: "liftlink" });
+     con.connect(function (err) {
+         if (err) throw err;
+             console.log("connected");
+     con.query(" update postride set time='" + p + "' where sid='" + a + "'", function (err, result) {
+                 if (err) throw err;
+                 console.log("Database Updated");
+                 
+             });
+         });
+
+         res.sendFile(path.join(__dirname, 'public', 'owner_after_login.html'));
+ 
+ 
+     
+   
+     // res.redirect('/star');
+    
+ 
+ });
+ 
+ });
+
+ app.post('/continue', async (req, res) => {
+
+    var a1 = req.body.distance;
+    var a2 = req.body.time;
+    var a = req.body.riderid;
+
+
+
+    let speed=a1/a2;
+    
+
+    var con = mysql.createConnection({ host: "localhost", user: "root", password: "root123", database: "liftlink" });
+    con.connect(function (err) {
+        if (err) throw err;
+            console.log("connected");
+    con.query(" update postride set speed='" + speed+ "' where sid='" + a + "'", function (err, result) {
+                if (err) throw err;
+                console.log("Database Updated");
+                
+            });
+        });
+
+
+    res.sendFile(path.join(__dirname, 'public', 'owner_after_login.html'));
+ 
+ 
+     
+   
+});
+ 
 
 
 

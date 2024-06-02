@@ -6,68 +6,6 @@
     list-style: none;
     box-sizing: border-box;
 }
-table td{
-    display: flex;
-    padding: 10px;
-    font-size:small;
-}
-#butt{
-    position: relative;
-    left: 30%;
-    color: white;
-    background-color: red;
-    padding: 5px;
-}
-
-#but{
-        position: relative;
-        left: 9%;
-        color: white;
-        background-color: red;
-        padding: 5px;
-}
-
-#but:hover{
-    background-color: blue;
-    color: white;
-}
-
-.info{
-    position: relative;
-    top:10%;
-    left:30%;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid black;
-    padding: 100px;
-}
-.row{
-    display: flex;
-    flex-direction: row;
-}
-
-#butt:hover{
-    background-color: blue;
-    color: white;
-}
-.img{
-    display: flex;
-}
-.pic{
-    position: relative;
-    left: 0%;
-    height: 700px;
-    width: 900px;
-}
-table{
-    position: relative;
-    width: 420px;
-    top: 15px;
-    left:30%;
-    border: 2px solid black;
-    padding: 20px;
-    justify-content:space-around;
-}
 .login {
     background-color: red;
     padding: 21px;
@@ -173,6 +111,7 @@ header .login .loginreg:hover {
     left:30px;
     
 }
+
 .dp {
     position: relative;
     left: 11%;
@@ -206,8 +145,7 @@ header .login .loginreg:hover {
 #title{
     margin-top: 20px;
     position: relative;
-    left:30%;
-    top:5%;
+    left:320px;
 
 }
 
@@ -257,7 +195,7 @@ float: left;
     border-radius: 15px;
     position: relative;
     height: 700px;
-    width: 100%; 
+    width: 70%; 
     text-align: center;
 }
 .teama .p {
@@ -354,14 +292,12 @@ float: left;
     color: white;
 }
 
-table .a{
-    position: absolute;
-    left: 36%;
-}
-
 .navbar nav ul li a:hover,
 .navbar nav ul li a.active {
     border-bottom-color: black;
+}
+.a{
+    padding: 20px;
 }
 
 .navbar nav {
@@ -503,11 +439,7 @@ table .a{
         height: 50px;
         width: 60px;
     }
-#v20{
-    position: absolute;
-    right:0px;
-    text-align: center;
-}
+
 h1 {
     display: inline-block;
     margin: 0;
@@ -676,6 +608,15 @@ footer {
     text-decoration: none; 
     transition: color 0.3s ease; 
    
+}
+.b{
+    color:white;
+    background-color: red;
+    padding: 5px;
+    
+}
+.b:hover{
+    background-color: black;
 }
 .call{
     position:absolute;

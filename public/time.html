@@ -21,43 +21,18 @@
                 const data = JSON.parse(item);
 
                 document.getElementById("v1").value = data[0].name;
-                document.getElementById("v2").value = data[0].address;
-                document.getElementById("v3").value = data[0].aadhar;
-                document.getElementById("v4").value = data[0].city;
-                document.getElementById("v6").value = data[0].pincode;
-                document.getElementById("v7").value = data[0].account;
-                document.getElementById("v8").value = data[0].charge_per_unit;
-                document.getElementById("v9").value = data[0].phoneno;
-                document.getElementById("v10").value = data[0].email;
-                // document.getElementById("v11").value = data[0].username;
-                document.getElementById("v12").value = data[0].sid;
-                document.getElementById("v13").value = data[0].starting_location;
-                document.getElementById("v14").value = data[0].ending_location;
-                document.getElementById("v15").value = data[0].time_taken;
-
+                document.getElementById("v2").value = data[0].CustomerId;
+                document.getElementById("v3").value = data[0].sid;
+                document.getElementById("v4").value = data[0].date;
+                document.getElementById("v5").value = data[0].BookingId;
             }
         }
-        xhttp.open("GET", "search1.json", true);
+        xhttp.open("GET", "geo.json", true);
         xhttp.send();
-    }
-
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            document.getElementById("Lat").innerHTML = "Geolocation is not supported by this browser.";
-        }
-    }
-
-    function showPosition(position) {
-        document.getElementById("Lat").value = position.coords.latitude;
-        document.getElementById("Lon").value = position.coords.longitude;
-        document.getElementById("accuracy").value = position.coords.accuracy;
-
     }
 </script>
 
-<body onload="showride(); getLocation()">
+<body onload="showride();">
     <header>
         <div class="login">
             <nav class="navtext">
@@ -126,73 +101,35 @@
     <div class="img">
         <img class="pic" src="dashboard.jpg">
 
-        <form action="/book" method="POST">
-            <h1 id="title">Confirm Ride</h1>
-            <table>
-                <tr>
-                    <td><b>Name:
-                        <div class="a"><input type="text" name="name" id="v1" readonly></b></div>
-                    </td>
-                    <td><b>Address:
-                        <div class="a"><input type="text" name="Address" id="v2" readonly></b></div>
-                    </td>
-                    <td><b>aadhar:
-                        <div class="a"><input type="text" name="aadhar" id="v3"></b></div>
-                    </td>
-                    <td><b>City:
-                        <div class="a"><input type="text" name="City" id="v4" readonly></b></div>
-                    </td>
-                    <td><b>Pin-Code:
-                        <div class="a"><input type="text" name="pincode" id="v6" readonly></b></div>
-                    </td>
-                    <td><b>Account No.:
-                        <div class="a"><input type="text" name="account" id="v7" readonly></b></div>
-                    </td>
-                    <td><b>Charge:
-                        <div class="a"><input type="text" name="charge" id="v8" readonly></b></div>
-                    </td>
-                    <td><b>Phone Number:
-                        <div class="a"><input type="text" name="phoneno" id="v9" readonly></b></div>
-                    </td>
-                    <td><b>Email:
-                        <div class="a"><input type="text" name="email" id="v10" readonly></b></div>
-                    </td>
-                    <td><b>Customer Id:
-                        <div class="a"><input type="text" name="CustomerId" ></b></div>
-                    </td>
-                    <td>
-                        <b>Rider-Id:
-                            <div class="a"><input type="text" name="sid" id="v12"></b></div>
-                    </td>
-                    <td>
-                        <b>Booking Id:
-                            <div class="a"><input type="text" name="BookingId" ></b></div>
-                    </td>
-                    <td><b>Starting Point:
-                        <div class="a"><input type="text" name="startingpoint" id="v13"></b></div>
-                    </td>
-                    <td><b>Ending Point:
-                        <div class="a"><input type="text" name="endingpoint" id="v14"></b></div>
-                    </td>
-                    <td><b>Date:
-                        <div class="a"><input type="text" name="date" id="v15"></b></div>
-                    </td>
-                    <td>
-                        <b>Status:
-                            <div class="a"><input type="text" value="Pending" name="status" id="v16" readonly></b></div>
-                    </td>
-                
-                       <input type="text" id="Lat" name="lat" >
-                       <input type="text" id="Lon" name="lon" >
-                       <input type="text" id="accuracy" name="accuracy" >
-                    
-                </tr>
-                <tr>
-                    <td>
-                        <div class="a"><input type="submit" value="Confirm Ride" id="butt"></div>
-                    </td>
-                </tr>
-            </table>
+
+
+
+        <form action="/mltime" method="POST">
+            
+            <h1 id="title">Time Taken</h1><br>
+            <div class="info">
+
+                    Rider Name:
+                    <input type="text" id="v1" name="name" readonly><br>
+            
+                    Total Time :
+                   <div class="row"><input type="number" step="0.5" min="0.5z" max="24" name="traveltime">/Hrs</div> <br>
+            
+                    Rider Id:
+                    <input type="Text" id="v3" name="RiderId" ><br>
+            
+                    Customer Id:
+                    <input type="Text" id="v2" name="CustomerId"><br>
+            
+                    Date:
+                    <input type="text" id="v4" name="date" ><br>
+            
+                    BookingId:
+                    <input type="Text" id="v5" name="BookingId" ><br>
+
+                        <input type="submit" id="but">
+            
+                    </div>
         </form>
     </div>
 

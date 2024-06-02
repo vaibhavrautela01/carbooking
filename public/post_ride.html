@@ -40,6 +40,8 @@
                 document.getElementById("p18").value = data[0].ending_location;
                 document.getElementById("p19").value = data[0].time_taken;
                 document.getElementById("p20").value = data[0].sid;
+                document.getElementById("p21").value= data[0].star;
+
             }
         }
         xhttp.open("GET", "showride.json", true);
@@ -135,6 +137,8 @@
 
                             </div>
                             <table>
+
+                                Rating: <input type="text" name="star" id="p21" readonly>
                                 <tr>
                                     <td class="td1">Name:</td>
                                     <td><input type="text" name="name" id="p1" placeholder="Enter your name" ></td>
@@ -230,6 +234,7 @@
                                    <br><br> <td><button id="submit" type="submit">Submit</button></td>
             
                             </table>
+                    
                         </form>
                     </div>
                 </div> 

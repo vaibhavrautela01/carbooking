@@ -2,50 +2,47 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="mybookingstatus.css">
+    <link rel="stylesheet" href="myride.css">
     <title>Pooling system</title>
-    <link rel="stylesheet" href="mybookingstatus2.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="/public/vaibhav.ico">
-
-
 
 
 
 </head>
 <script>
-    function showride() {
-        
-      var xhttp = new XMLHttpRequest();
-    
-      xhttp.onreadystatechange = function () {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-          const item = xhttp.responseText;
-          const data = JSON.parse(item);
-          let text = "<table border='1' cellpadding='0' cellspacing='0'>";
-                text +="<th>Name</th><th>Starting location</th><th>Ending location</th><th>Aadhar No.</th><th>Registration No.</th><th>DL No.</th><th>Pollution</th><th>Document Clear</th><th>Driving Experience</th><th>Phone No.</th><th>Account</th><th>Charge per km</th><th>Date</th><th>S.ID</th><th>Status</th><th>Booking Id</th><th></th>"
-          for (let x in data) {
-
-            text +=  "<tr><td >" +data[x].name  + "</b><br></td><td >"+ data[x].startingpoint + "</b></td><td >" +data[x].endingpoint + "</b></td><td >" + data[x].aadhar + "</td><td >" + data[x].vehicle_reg + "</td><td>" + data[x].dll_no + "</td><td >" + data[x].pollution + "</td><td >" + data[x].document_clear + "</td><td >" + data[x].driving_exper + "</td><td >" + data[x].phoneno + "</td><td >" + data[x].accountno + "</td><td >" + data[x].charge + "</td><td >" + data[x].date + "</td><td >"+data[x].sid  + "</b></td><td >"  + data[x].status +"</td><td>" + data[x].BookingId + "</b></td><td><a id='c' href='geolocation.html'>Get in for Ride.</a></td></tr>"; 
-          }
-          text += "</table>";
-          document.getElementById("v1").innerHTML = text;
+    function aa() {
+        var xhttp;
+        if (window.XMLHttpRequest) {
+            xhttp = new XMLHttpRequest();
+        } else {
+            xhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-      }
-      xhttp.open("GET", "mybookingstatus.json", true);
-      xhttp.send();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                const item = xhttp.responseText;
+                const data = JSON.parse(item);
+
+                document.getElementById("t1").value = data[0].time;
+                document.getElementById("t2").value = data[0].charge_per_unit;
+                document.getElementById("t3").value = data[0].sid;
+            }
+        }
+        xhttp.open("GET", "search1.json", true);
+        xhttp.send();
     }
     
-
 </script>
 
 
+<body onload="aa()">
     <header>
         <div class="login">
             <nav class="navtext">
                 <ul>
-                    <a href="owner_after_login.html" class="menu" target="_blank">My Profile</a>
-                    <a href="edit_profile.html" class="menu" target="_blank">Edit Profile</a>
-                    <a href="book_ride.html" class="menu" target="_blank">Book Ride</a>
+
+                    <a href="dashboard2.html" class="menu" target="_blank">My Profile</a>
+                    <a href="clienteditprofile.html" class="menu" target="_blank">Edit Profile</a>
                     <a href="update_ride.html" class="menu" target="_blank">Update Ride</a>
 
                 </ul>
@@ -56,7 +53,7 @@
                 <div class="dropdown">
                     <img src="th.jpeg" alt="User Photo" class="dropbtn">
                     <div class="dropdown-content">
-                        <a href="owner_login.html">Logout</a>
+                        <a href="login2.html">Logout</a>
                         <a href="passwordreset.html">Change Password</a>
                     </div>
                 </div>
@@ -107,62 +104,26 @@
             </ul>
         </nav>
     </div>
-    
-   
-<body onload="showride()">
-   
-    <form action="/mybookingstatus" method="POST" >
-        
-             <label>Status:</label>
-             <select name="status">
-                <option value="choose">Choose</option>
-                <option value="pending">Pending</option>
-                <option value="cancel">Cancel</option>
-                <option value="Booked">Booked</option>
-             </select>
-             <input type="submit" value="search" id="h">
 
-<div class="info">
 
-            <div id="v1"></div>
 
-            <div id="v2"></div>
 
-            <div id="v3"></div>
+    <form action="/continue" method="POST">
+        <div id="demo">
 
-            <div id="v4"></div>
 
-            <div id="v5"></div>
+            <div class="a"><input type="text" name="time" id="t1" ></div>
+            <div class="a"><input type="text" name="distance" id="t2" ></div>
+            <div class="a"><input type="text" name="riderid" id="t3" ></div>
 
-            <div id="v6"></div>
 
-            <div id="v7"></div>
 
-            <div id="v8"></div>
-
-            <div id="v9"></div>
-
-            <div id="v10"></div>
-
-            <div id="v11"></div>
-
-            <div id="v12"></div>
-
-            <div id="v13"></div>
-
-            <div id="v14"></div>
-
-            <div id="v15"></div>
-
-            <div id="v16"></div>
+            <input type="submit" value="Refresh" class="b">
         </div>
     </form>
 
 
-
 </body>
-
-
 
 
 

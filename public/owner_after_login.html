@@ -34,6 +34,7 @@
                     document.getElementById("p12").innerHTML = data[0].pollution;
                     document.getElementById("p13").innerHTML = data[0].driving_expe;
                     document.getElementById("p14").innerHTML = data[0].document_clear;
+                    document.getElementById("p15").innerHTML=data[0].star;
 
                 }
             }
@@ -51,7 +52,8 @@
                 <a href="owner_after_login.html" class="menu" target="_blank">My Profile</a>
                 <a href="edit_profile.html" class="menu" target="_blank">Edit Profile</a>
                 <a href="post_ride.html" class="menu">Post Ride</a>
-                    <a href="updatepostride.html" class="menu">Update Ride</a>
+                <a href="updatepostride.html" class="menu">Update Ride</a>
+
                     
                 </ul>                    
             </nav>
@@ -131,6 +133,7 @@
                     
                         <form action="/" method="POST">
                             <h1 id="title">Ride Way</h1>
+                                Rating:  <span id="p15"></span>
                             <table>
                                 
 
